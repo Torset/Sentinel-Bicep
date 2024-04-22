@@ -1,0 +1,93 @@
+name: Azure Deploy - Sentinel
+on:
+  pull_request:
+    branches: [main]
+    paths: ["**.bicep*"] # for multiple workflows, limit to a path: "ptn/avd/**.bicep*"
+    types: [opened, synchronize]
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+permissions: {}
+
+env:
+  auto_merge: squash
+  azure_client_id: null
+  # azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+  azure_subscription_id: 91bd2c59-d903-4a1e-9f9e-cb4c471bc319 #Jørgen personal
+  azure_tenant_id: abf67dae-9a43-4bf0-aa92-151fd6a1d425
+  azure_providers: Microsoft.Advisor,Microsoft.AlertsManagement,Microsoft.Authorization,Microsoft.Consumption,Microsoft.EventGrid,microsoft.insights,Microsoft.ManagedIdentity,Microsoft.Management,Microsoft.Network,Microsoft.PolicyInsights,Microsoft.ResourceHealth,Microsoft.Resources,Microsoft.Security
+  azure_provider_wait_count: 30
+  azure_provider_wait_seconds: 10
+  cost_threshold: 1000
+  currency: EUR
+  location: westeurope
+  log_severity: INFO
+  rule_option: ps-rule.yaml
+  scope: sub
+  template: main.bicep
+  template_parameters: main.bicepparam # parameters can be passed inline too, like this: namePrefix=t serviceShort=tstsp3
+
+jobs:
+  plan:
+    name: 🗓️ Plan
+    permissions:
+      contents: read # for checkout
+      id-token: write # for Azure login with open id
+      pull-requests: write # for pull request comment
+    outputs:
+      providers: ${{ steps.plan.outputs.providers }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Plan
+        id: plan
+        uses: innofactororg/bicep-action/.github/actions/plan@v1
+        with:
+          azure_client_id: ${{ env.azure_client_id }} # for secret, use ${{ secrets.AZURE_CLIENT_ID }}
+          azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }} # use this if choosing Option 2 in Get started
+          azure_providers: ${{ env.azure_providers }}
+          azure_subscription_id: ${{ env.azure_subscription_id }} # for secret, use ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          azure_tenant_id: ${{ env.azure_tenant_id }} # for secret, use ${{ secrets.AZURE_TENANT_ID }}
+          cost_threshold: ${{ env.cost_threshold }}
+          currency: ${{ env.currency }}
+          location: ${{ env.location }}
+          log_severity: ${{ env.log_severity }}
+          rule_option: ${{ env.rule_option }}
+          scope: ${{ env.scope }}
+          template: ${{ env.template }}
+          template_parameters: ${{ env.template_parameters }}
+
+  deploy:
+    name: 🏃 Deploy
+    needs: plan
+    environment: Production
+    permissions:
+      contents: write # for auto merge
+      id-token: write # for Azure login with open id
+      pull-requests: write # for pull request comment
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy
+        id: deploy
+        uses: innofactororg/bicep-action/.github/actions/deploy@v1
+        with:
+          auto_merge: ${{ env.auto_merge }}
+          azure_client_id: ${{ env.azure_client_id }} # for secret, use ${{ secrets.AZURE_CLIENT_ID }}
+          azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }} # use this if choosing Option 2 in Get started
+          azure_providers: ${{ needs.plan.outputs.providers }}
+          azure_provider_wait_count: ${{ env.azure_provider_wait_count }}
+          azure_provider_wait_seconds: ${{ env.azure_provider_wait_seconds }}
+          azure_subscription_id: ${{ env.azure_subscription_id }} # for secret, use ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          azure_tenant_id: ${{ env.azure_tenant_id }} # for secret, use ${{ secrets.AZURE_TENANT_ID }}
+          location: ${{ env.location }}
+          log_severity: ${{ env.log_severity }}
+          scope: ${{ env.scope }}
+          template: ${{ env.template }}
+          template_parameters: ${{ env.template_parameters }}
