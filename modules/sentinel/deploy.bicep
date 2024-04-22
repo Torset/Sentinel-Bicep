@@ -1,0 +1,34 @@
+@description('Required. Name of the Log Analytics workspace.')
+param workspaceName string
+
+param location string
+
+module workspace 'br/public:avm/res/operational-insights/workspace:0.3.4' = {
+  name: 'workspaceDeployment'
+  params: {
+    // Required parameters
+    name: workspaceName
+    // Non-required parameters
+    location: location
+    dataRetention: 60
+    skuName: 'PerGB2018'
+  }
+}
+
+
+resource sentinel 'Microsoft.OperationsManagement/solutions@2015-11-01-preview' = {
+  name: 'sentinelDeployment'
+  dependsOn: [workspace]
+  location:location
+  properties:{
+    workspaceResourceId: workspace.outputs.resourceId
+  }
+  plan: {
+    name: 'SecurityInsights(${workspaceName})'
+    product: 'OMSGallery/SecurityInsights'
+    promotionCode: ''
+    publisher: 'Microsoft'
+  }
+
+ 
+}
