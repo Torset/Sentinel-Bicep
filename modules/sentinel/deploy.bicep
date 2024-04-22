@@ -17,8 +17,7 @@ module workspace 'br/public:avm/res/operational-insights/workspace:0.3.4' = {
 
 
 resource sentinel 'Microsoft.OperationsManagement/solutions@2015-11-01-preview' = {
-  name: 'sentinelDeployment'
-  dependsOn: [workspace]
+  name: 'SecurityInsights(${workspaceName})'
   location:location
   properties:{
     workspaceResourceId: workspace.outputs.resourceId
