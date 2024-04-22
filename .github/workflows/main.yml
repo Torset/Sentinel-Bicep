@@ -48,7 +48,7 @@ jobs:
         uses: innofactororg/bicep-action/.github/actions/plan@v1
         with:
           azure_client_id: ${{ env.azure_client_id }} # for secret, use ${{ secrets.AZURE_CLIENT_ID }}
-          azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }} # use this if choosing Option 2 in Get started
+          # azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }} # use this if choosing Option 2 in Get started
           azure_providers: ${{ env.azure_providers }}
           azure_subscription_id: ${{ env.azure_subscription_id }} # for secret, use ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           azure_tenant_id: ${{ env.azure_tenant_id }} # for secret, use ${{ secrets.AZURE_TENANT_ID }}
@@ -80,7 +80,7 @@ jobs:
         with:
           auto_merge: ${{ env.auto_merge }}
           azure_client_id: ${{ env.azure_client_id }} # for secret, use ${{ secrets.AZURE_CLIENT_ID }}
-          azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }} # use this if choosing Option 2 in Get started
+          # azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }} # use this if choosing Option 2 in Get started
           azure_providers: ${{ needs.plan.outputs.providers }}
           azure_provider_wait_count: ${{ env.azure_provider_wait_count }}
           azure_provider_wait_seconds: ${{ env.azure_provider_wait_seconds }}
