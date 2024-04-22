@@ -13,10 +13,10 @@ permissions: {}
 
 env:
   auto_merge: squash
-  azure_client_id: null
+  azure_client_id: ${{ secrets.AZURE_CLIENT_ID }}
   # azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-  azure_subscription_id: 91bd2c59-d903-4a1e-9f9e-cb4c471bc319 #Jørgen personal
-  azure_tenant_id: abf67dae-9a43-4bf0-aa92-151fd6a1d425
+  azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} 
+  azure_tenant_id:  ${{ secrets.AZURE_TENANT_ID }}
   azure_providers: Microsoft.Advisor,Microsoft.AlertsManagement,Microsoft.Authorization,Microsoft.Consumption,Microsoft.EventGrid,microsoft.insights,Microsoft.ManagedIdentity,Microsoft.Management,Microsoft.Network,Microsoft.PolicyInsights,Microsoft.ResourceHealth,Microsoft.Resources,Microsoft.Security
   azure_provider_wait_count: 30
   azure_provider_wait_seconds: 10
