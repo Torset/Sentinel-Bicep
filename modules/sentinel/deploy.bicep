@@ -10,9 +10,9 @@ param tenantId string
 module workspace 'br/public:avm/res/operational-insights/workspace:0.3.4' = {
   name: 'workspaceDeployment'
   params: {
-    // Required parameters
+    // Required parameters.
     name: workspaceName
-    // Non-required parameters
+    // Non-required parameters.
     location: location
     dataRetention: 60
     skuName: 'PerGB2018'
