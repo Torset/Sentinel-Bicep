@@ -3,6 +3,8 @@ param workspaceName string
 
 param location string
 
+param tenantId string
+
 module workspace 'br/public:avm/res/operational-insights/workspace:0.3.4' = {
   name: 'workspaceDeployment'
   params: {
@@ -28,6 +30,26 @@ resource sentinel 'Microsoft.OperationsManagement/solutions@2015-11-01-preview' 
     promotionCode: ''
     publisher: 'Microsoft'
   }
+}
 
- 
+resource laws 'Microsoft.OperationalInsights/workspaces@2022-10-01' existing = {
+  name: workspaceName
+ }
+
+
+resource azureADDataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02-01-preview' = {
+  name: '${workspaceName}-AzureActiveDirectory'
+  kind: 'AzureActiveDirectory'
+  scope: laws
+  dependsOn: [
+    sentinel
+  ]
+  properties: {
+    dataTypes: {
+      alerts: {
+        state: 'Enabled'
+      }
+    }
+    tenantId: tenantId
+  }
 }
