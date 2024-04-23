@@ -10,6 +10,10 @@ param tenantId string
 @description('The state of the AzureActiveDirectory data connector')
 param azureADDataConnectorState string
 
+@description('The state of the AzureActivity data connector')
+param azureActivityDataConnectorState string
+
+
 
 module workspace 'br/public:avm/res/operational-insights/workspace:0.3.4' = {
   name: 'workspaceDeployment'
@@ -54,6 +58,20 @@ resource azureADDataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02
     dataTypes: {
       alerts: {
         state: azureADDataConnectorState
+      }
+    }
+    tenantId: tenantId
+  }
+}
+
+resource azureActivityDataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02-01' = {
+  name: '${workspaceName}-AzureActiveDirectory'
+  kind: 'AzureActivity'
+  scope: laws
+  properties: {
+    dataTypes: {
+      alerts: {
+        state: azureActivityDataConnectorState
       }
     }
     tenantId: tenantId
