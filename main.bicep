@@ -4,6 +4,8 @@ param location string
 @description('The name of the Log Analytics Workspace where Sentinel will be deployed.')
 param workspaceName string
 
+param tenantId string
+
 targetScope = 'subscription'
 
 
@@ -19,8 +21,11 @@ module sentinel './modules/sentinel/deploy.bicep' = {
   params: {
     location: location
     workspaceName: workspaceName
+    tenantId: tenantId
   }
 }
+
+
 
 
 
