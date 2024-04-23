@@ -84,7 +84,7 @@ resource office365DataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-
 }
 
 resource UEBASetting 'Microsoft.SecurityInsights/settings@2023-02-01-preview' = {
-  name: '${workspaceName}-UEBASetting'
+  name: 'Ueba'
   kind: 'Ueba'
   scope: laws
   // For remaining properties, see settings objects
@@ -152,8 +152,7 @@ resource MfaRejectedByUser 'Microsoft.SecurityInsights/alertRules@2023-02-01-pre
     }
     query: '''
     let dt_lookBack = 1h; // Lookback time for recent data, set to 1 hour
-    let ioc_lookBack = 14d; // Lookback time for threat feed data, set to 14
-    days
+    let ioc_lookBack = 14d; // Lookback time for threat feed data, set to 14 days
     // Create a list of TLDs in our threat feed for later validation
     let list_tlds = ThreatIntelligenceIndicator
       | where TimeGenerated >= ago(ioc_lookBack)
