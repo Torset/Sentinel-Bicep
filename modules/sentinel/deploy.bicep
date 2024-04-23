@@ -99,16 +99,6 @@ resource office365DataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-
   }
 }
 
-resource sentinelSettingsUeba 'Microsoft.SecurityInsights/settings@2023-02-01-preview' = if (enableUeba) {
-  name: 'Ueba'
-  kind: 'Ueba'
-  scope: laws
-  // For remaining properties, see settings objects
-  properties: {
-    dataSources: uebaDataSources
-  }
-}
-
 resource sentinelSettingsEntityAnalytics 'Microsoft.SecurityInsights/settings@2023-04-01-preview' = if (enableEntityAnalytics) {
   name: 'EntityAnalytics'
   kind: 'EntityAnalytics'
@@ -117,6 +107,19 @@ resource sentinelSettingsEntityAnalytics 'Microsoft.SecurityInsights/settings@20
     entityProviders: entityAnalyticsEntityProviders
   } 
 }
+
+
+resource sentinelSettingsUeba 'Microsoft.SecurityInsights/settings@2023-02-01-preview' = if (enableUeba) {
+  name: 'Ueba'
+  kind: 'Ueba'
+  scope: laws
+  dependsOn:[sentinelSettingsEntityAnalytics]
+  // For remaining properties, see settings objects
+  properties: {
+    dataSources: uebaDataSources
+  }
+}
+
 
   
 
@@ -142,7 +145,7 @@ resource MfaRejectedByUser 'Microsoft.SecurityInsights/alertRules@2023-02-01-pre
         fieldMappings: [
           {
             columnName: 'FullName'
-            identifier: 'UserPrincipalName'
+            identifier: 'FullName'
           }
           {
             columnName: 'Name'
@@ -230,7 +233,7 @@ resource MfaRejectedByUser 'Microsoft.SecurityInsights/alertRules@2023-02-01-pre
       'InitialAccess'
     ]
     techniques: [
-      'T1078.004'
+      'T1078'
     ]
     templateVersion: '2.0.3'
     triggerOperator: 'GreaterThan'
