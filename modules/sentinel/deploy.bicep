@@ -3,6 +3,7 @@ param workspaceName string
 
 param location string
 
+
 param tenantId string
 
 module workspace 'br/public:avm/res/operational-insights/workspace:0.3.4' = {
@@ -52,4 +53,5 @@ resource azureADDataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02
     }
     tenantId: tenantId
   }
+
 }

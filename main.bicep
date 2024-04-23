@@ -21,11 +21,17 @@ module sentinel './modules/sentinel/deploy.bicep' = {
   params: {
     location: location
     workspaceName: workspaceName
+
     tenantId: tenantId
   }
 }
 
 
+
+
+
+  }
+}
 
 
 
