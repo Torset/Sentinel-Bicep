@@ -27,6 +27,9 @@ module workspace 'br/public:avm/res/operational-insights/workspace:0.3.4' = {
 resource sentinel 'Microsoft.OperationsManagement/solutions@2015-11-01-preview' = {
   name: 'SecurityInsights(${workspaceName})'
   location:location
+  dependsOn:[
+    workspace
+  ]
   properties:{
     workspaceResourceId: workspace.outputs.resourceId
   }
@@ -80,27 +83,27 @@ resource office365DataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-
   }
 }
 
-
-// Alert rules //
-
+  /////////////////
+ // Alert rules //
+/////////////////
 
 resource MfaRejectedByUser 'Microsoft.SecurityInsights/alertRules@2023-02-01-preview' = {
   name: 'MFA Rejected by User'
   kind: 'Scheduled'
-  scope: sentinel
+  scope: laws
   // For remaining properties, see alertRules objects
   properties: {
     alertDetailsOverride: {
-      alertDescriptionFormat: 'string'
-      alertDisplayNameFormat: 'string'
+      alertDescriptionFormat: null
+      alertDisplayNameFormat: null
       alertDynamicProperties: [
         {
-          alertProperty: 'string'
-          value: 'string'
+          alertProperty: null
+          value: null
         }
       ]
-      alertSeverityColumnName: 'string'
-      alertTacticsColumnName: 'string'
+      alertSeverityColumnName: null
+      alertTacticsColumnName: null
     }
     alertRuleTemplateName: 'd99cf5c3-d660-436c-895b-8a8f8448da23'
     customDetails: {}
@@ -210,7 +213,6 @@ resource MfaRejectedByUser 'Microsoft.SecurityInsights/alertRules@2023-02-01-pre
     techniques: [
   
     ]
-  
     templateVersion: '1.4.1'
     triggerOperator: 'GreaterThan'
     triggerThreshold: 0
