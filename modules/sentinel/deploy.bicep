@@ -83,6 +83,23 @@ resource office365DataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-
   }
 }
 
+resource UEBASetting 'Microsoft.SecurityInsights/settings@2023-02-01-preview' = {
+  name: '${workspaceName}-UEBASetting'
+  kind: 'Ueba'
+  scope: laws
+  // For remaining properties, see settings objects
+  properties: {
+    dataSources: [
+      'AuditLogs'
+      'AzureActivity'
+      'SecurityEvent'
+      'SigninLogs'
+    ]
+  }
+}
+
+  
+
   /////////////////
  // Alert rules //
 /////////////////
@@ -93,18 +110,6 @@ resource MfaRejectedByUser 'Microsoft.SecurityInsights/alertRules@2023-02-01-pre
   scope: laws
   // For remaining properties, see alertRules objects
   properties: {
-    alertDetailsOverride: {
-      alertDescriptionFormat: null
-      alertDisplayNameFormat: null
-      alertDynamicProperties: [
-        {
-          alertProperty: null
-          value: null
-        }
-      ]
-      alertSeverityColumnName: null
-      alertTacticsColumnName: null
-    }
     alertRuleTemplateName: 'd99cf5c3-d660-436c-895b-8a8f8448da23'
     customDetails: {}
     description: 'Identifies occurances where a user has rejected an MFA prompt. This could be an indicator that a threat actor has compromised the username and password of this user account and is using it to try and log into the account.\r\n  Ref : https://docs.microsoft.com/azure/active-directory/fundamentals/security-operations-user-accounts#monitoring-for-failed-unusual-sign-ins\r\n  This query has also been updated to include UEBA logs IdentityInfo and BehaviorAnalytics for contextual information around the results.'
