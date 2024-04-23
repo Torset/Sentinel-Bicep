@@ -7,12 +7,13 @@ param workspaceName string
 @description('The tenant ID where the resources will be deployed.')
 param tenantId string
 
+
 targetScope = 'subscription'
 
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   location: location
-  name: 'Test-RG1'
+  name: 'New-Sentinel-RG'
   properties: {}
 }
 

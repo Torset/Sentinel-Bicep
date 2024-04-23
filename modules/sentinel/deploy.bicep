@@ -7,6 +7,10 @@ param location string
 @description('Optional. The tenant ID where the resources will be deployed.')
 param tenantId string
 
+
+
+
+
 module workspace 'br/public:avm/res/operational-insights/workspace:0.3.4' = {
   name: 'workspaceDeployment'
   params: {
@@ -38,6 +42,9 @@ resource laws 'Microsoft.OperationalInsights/workspaces@2022-10-01' existing = {
   name: workspaceName
  }
 
+  /////////////////////
+ // Data connectors //
+/////////////////////
 
 resource azureADDataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02-01' = {
   name: '${workspaceName}-AzureActiveDirectory'
@@ -52,3 +59,25 @@ resource azureADDataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02
     tenantId: tenantId
   }
 }
+
+resource office365DataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02-01' = {
+  name: '${workspaceName}-Office365'
+  kind: 'Office365'
+  scope: laws
+  properties: {
+    dataTypes: {
+      exchange: {
+        state: 'Enabled'
+      }
+      sharePoint: {
+        state: 'Enabled'
+      }
+      teams: {
+        state: 'Enabled'
+      }
+    }
+    tenantId: tenantId
+  }
+}
+
+
