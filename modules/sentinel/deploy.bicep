@@ -7,11 +7,7 @@ param location string
 @description('Optional. The tenant ID where the resources will be deployed.')
 param tenantId string
 
-@description('The state of the AzureActiveDirectory data connector')
-param azureADDataConnectorState string
 
-@description('The state of the Office365 data connector')
-param office365DataConnectorState string
 
 
 
@@ -57,7 +53,7 @@ resource azureADDataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02
   properties: {
     dataTypes: {
       alerts: {
-        state: azureADDataConnectorState
+        state: 'Enabled'
       }
     }
     tenantId: tenantId
@@ -70,10 +66,18 @@ resource office365DataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-
   scope: laws
   properties: {
     dataTypes: {
-      alerts: {
-        state: office365DataConnectorState
+      exchange: {
+        state: 'Enabled'
+      }
+      sharePoint: {
+        state: 'Enabled'
+      }
+      teams: {
+        state: 'Enabled'
       }
     }
     tenantId: tenantId
   }
 }
+
+

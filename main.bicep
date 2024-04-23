@@ -7,11 +7,6 @@ param workspaceName string
 @description('The tenant ID where the resources will be deployed.')
 param tenantId string
 
-@description('The state of the AzureActiveDirectory data connector')
-param azureADDataConnectorState string
-
-@description('The state of the Office365 data connector')
-param office365DataConnectorState string
 
 targetScope = 'subscription'
 
@@ -29,8 +24,6 @@ module sentinel './modules/sentinel/deploy.bicep' = {
     location: location
     workspaceName: workspaceName
     tenantId: tenantId
-    azureADDataConnectorState: azureADDataConnectorState
-    office365DataConnectorState: office365DataConnectorState
   }
 }
 
