@@ -39,13 +39,10 @@ resource laws 'Microsoft.OperationalInsights/workspaces@2022-10-01' existing = {
  }
 
 
-resource azureADDataConnector 'Microsoft.SecurityInsights/dataConnectors@2024-01-01-preview' = {
+resource azureADDataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02-01' = {
   name: '${workspaceName}-AzureActiveDirectory'
   kind: 'AzureActiveDirectory'
   scope: laws
-  dependsOn: [
-    sentinel
-  ]
   properties: {
     dataTypes: {
       alerts: {
