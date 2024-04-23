@@ -144,16 +144,16 @@ resource MfaRejectedByUser 'Microsoft.SecurityInsights/alertRules@2023-02-01-pre
         entityType: 'Account'
         fieldMappings: [
           {
-            columnName: 'FullName'
             identifier: 'FullName'
+            columnName: 'UserPrincipalName'
           }
           {
-            columnName: 'Name'
             identifier: 'Name'
+            columnName: 'Name'
           }
           {
-            columnName: 'UPNSuffix'
             identifier: 'UPNSuffix'
+            columnName: 'UPNSuffix'
           }
         ]
       }
@@ -161,8 +161,8 @@ resource MfaRejectedByUser 'Microsoft.SecurityInsights/alertRules@2023-02-01-pre
         entityType: 'Account'
         fieldMappings: [
           {
-            columnName: 'AadUserId'
             identifier: 'AadUserId'
+            columnName: 'UserId'
           }
         ]
       }
@@ -170,8 +170,8 @@ resource MfaRejectedByUser 'Microsoft.SecurityInsights/alertRules@2023-02-01-pre
         entityType: 'IP'
         fieldMappings: [
           {
-            columnName: 'Address'
-            identifier: 'IPAddress'
+            identifier: 'Address'
+            columnName: 'IPAddress'
           }
         ]
       }
