@@ -7,6 +7,10 @@ param location string
 @description('Optional. The tenant ID where the resources will be deployed.')
 param tenantId string
 
+@description('The state of the AzureActiveDirectory data connector')
+param azureADDataConnectorState string
+
+
 module workspace 'br/public:avm/res/operational-insights/workspace:0.3.4' = {
   name: 'workspaceDeployment'
   params: {
@@ -38,6 +42,9 @@ resource laws 'Microsoft.OperationalInsights/workspaces@2022-10-01' existing = {
   name: workspaceName
  }
 
+  /////////////////////
+ // Data connectors //
+/////////////////////
 
 resource azureADDataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02-01' = {
   name: '${workspaceName}-AzureActiveDirectory'
@@ -46,7 +53,7 @@ resource azureADDataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02
   properties: {
     dataTypes: {
       alerts: {
-        state: 'Enabled'
+        state: azureADDataConnectorState
       }
     }
     tenantId: tenantId
