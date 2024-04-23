@@ -7,6 +7,22 @@ param location string
 @description('Optional. The tenant ID where the resources will be deployed.')
 param tenantId string
 
+@description('entityAnalyticsEntityProviders')
+param entityAnalyticsEntityProviders array = [
+  'AzureActiveDirectory'
+]
+
+@description('uebaDataSources')
+param uebaDataSources array = [ 'AuditLogs'
+  'AzureActivity'
+  'SecurityEvent'
+  'SigninLogs' ]
+
+@description('Optional. Enable Entity Analytics')
+param enableEntityAnalytics bool = true
+
+@description('Optional. Enable UEBA')
+param enableUeba bool = true
 
 
 
@@ -83,19 +99,23 @@ resource office365DataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-
   }
 }
 
-resource UEBASetting 'Microsoft.SecurityInsights/settings@2023-02-01-preview' = {
+resource sentinelSettingsUeba 'Microsoft.SecurityInsights/settings@2023-02-01-preview' = if (enableUeba) {
   name: 'Ueba'
   kind: 'Ueba'
   scope: laws
   // For remaining properties, see settings objects
   properties: {
-    dataSources: [
-      'AuditLogs'
-      'AzureActivity'
-      'SecurityEvent'
-      'SigninLogs'
-    ]
+    dataSources: uebaDataSources
   }
+}
+
+resource sentinelSettingsEntityAnalytics 'Microsoft.SecurityInsights/settings@2023-04-01-preview' = if (enableEntityAnalytics) {
+  name: 'EntityAnalytics'
+  kind: 'EntityAnalytics'
+  scope: laws
+  properties: {
+    entityProviders: entityAnalyticsEntityProviders
+  } 
 }
 
   
