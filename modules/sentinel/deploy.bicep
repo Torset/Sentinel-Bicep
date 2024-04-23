@@ -1,8 +1,10 @@
 @description('Required. Name of the Log Analytics workspace.')
 param workspaceName string
 
+@description('Optional. Location for all resources.')
 param location string
 
+@description('Optional. The tenant ID where the resources will be deployed.')
 param tenantId string
 
 module workspace 'br/public:avm/res/operational-insights/workspace:0.3.4' = {

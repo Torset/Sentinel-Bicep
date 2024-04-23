@@ -4,6 +4,7 @@ param location string
 @description('The name of the Log Analytics Workspace where Sentinel will be deployed.')
 param workspaceName string
 
+@description('The tenant ID where the resources will be deployed.')
 param tenantId string
 
 targetScope = 'subscription'
