@@ -19,10 +19,10 @@ param uebaDataSources array = [ 'AuditLogs'
   'SigninLogs' ]
 
 @description('Optional. Enable Entity Analytics')
-param enableEntityAnalytics bool = true
+param enableEntityAnalytics bool 
 
 @description('Optional. Enable UEBA')
-param enableUeba bool = true
+param enableUeba bool
 
 
 
@@ -162,7 +162,7 @@ resource MfaRejectedByUser 'Microsoft.SecurityInsights/alertRules@2023-02-01-pre
         fieldMappings: [
           {
             columnName: 'AadUserId'
-            identifier: 'UserId'
+            identifier: 'AadUserId'
           }
         ]
       }

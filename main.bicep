@@ -7,6 +7,12 @@ param workspaceName string
 @description('The tenant ID where the resources will be deployed.')
 param tenantId string
 
+@description('Enable Entity Analytics')
+param enableEntityAnalytics bool
+
+@description('Enable UEBA')
+param enableUeba bool
+
 
 targetScope = 'subscription'
 
@@ -24,6 +30,8 @@ module sentinel './modules/sentinel/deploy.bicep' = {
     location: location
     workspaceName: workspaceName
     tenantId: tenantId
+    enableEntityAnalytics:enableEntityAnalytics
+    enableUeba:enableUeba
   }
 }
 
