@@ -222,11 +222,7 @@ resource MfaRejectedByUser 'Microsoft.SecurityInsights/alertRules@2023-02-01-pre
     '''
     queryFrequency: 'PT1H'
     queryPeriod: 'P14D'
-    sentinelEntitiesMappings: [
-      {
-        columnName: 'string'
-      }
-    ]
+    sentinelEntitiesMappings: []
     suppressionEnabled: false
     suppressionDuration: 'PT1H'
     tactics: [
