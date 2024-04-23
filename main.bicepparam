@@ -13,5 +13,5 @@ param tenantId = 'abf67dae-9a43-4bf0-aa92-151fd6a1d425'
 
 param azureADDataConnectorState = 'Enabled' // Needs Global- / Security Administrator
 
-param azureActivityDataConnectorState = 'Enabled'
+param office365DataConnectorState = 'Enabled'
 

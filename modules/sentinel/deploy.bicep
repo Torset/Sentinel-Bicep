@@ -10,8 +10,8 @@ param tenantId string
 @description('The state of the AzureActiveDirectory data connector')
 param azureADDataConnectorState string
 
-@description('The state of the AzureActivity data connector')
-param azureActivityDataConnectorState string
+@description('The state of the Office365 data connector')
+param office365DataConnectorState string
 
 
 
@@ -64,14 +64,14 @@ resource azureADDataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02
   }
 }
 
-resource azureActivityDataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02-01' = {
-  name: '${workspaceName}-AzureActiveDirectory'
-  kind: 'AzureActivity'
+resource office365DataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02-01' = {
+  name: '${workspaceName}-Office365'
+  kind: 'Office365'
   scope: laws
   properties: {
     dataTypes: {
       alerts: {
-        state: azureActivityDataConnectorState
+        state: office365DataConnectorState
       }
     }
     tenantId: tenantId

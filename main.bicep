@@ -10,8 +10,8 @@ param tenantId string
 @description('The state of the AzureActiveDirectory data connector')
 param azureADDataConnectorState string
 
-@description('The state of the AzureActivity data connector')
-param azureActivityDataConnectorState string
+@description('The state of the Office365 data connector')
+param office365DataConnectorState string
 
 targetScope = 'subscription'
 
@@ -30,7 +30,7 @@ module sentinel './modules/sentinel/deploy.bicep' = {
     workspaceName: workspaceName
     tenantId: tenantId
     azureADDataConnectorState: azureADDataConnectorState
-    azureActivityDataConnectorState: azureActivityDataConnectorState
+    office365DataConnectorState: office365DataConnectorState
   }
 }
 
