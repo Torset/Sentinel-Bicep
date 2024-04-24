@@ -19,8 +19,6 @@ param enableEyesOn bool
 @description('Enable Anomalies')
 param enableAnomalies bool
 
-@description('Optional. Enable Anomalies')
-param lawsDataSources array
 
 
 targetScope = 'subscription'
@@ -43,7 +41,6 @@ module sentinel './modules/sentinel/deploy.bicep' = {
     enableUeba:enableUeba
     enableEyesOn:enableEyesOn
     enableAnomalies:enableAnomalies
-    lawsDataSources:lawsDataSources
   }
 }
 

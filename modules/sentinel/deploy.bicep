@@ -30,8 +30,7 @@ param enableEyesOn bool
 @description('Optional. Enable Anomalies')
 param enableAnomalies bool
 
-@description('Optional. Enable Anomalies')
-param lawsDataSources array
+
 
 
 module workspace 'br/public:avm/res/operational-insights/workspace:0.3.4' = {
@@ -43,7 +42,6 @@ module workspace 'br/public:avm/res/operational-insights/workspace:0.3.4' = {
     location: location
     dataRetention: 60
     skuName: 'PerGB2018'
-    dataSources: lawsDataSources 
   }
 }
 

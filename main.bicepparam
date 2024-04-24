@@ -12,11 +12,3 @@ param enableUeba = true
 param enableAnomalies = true
 param enableEyesOn = true
 
-// Log Analytics settings
-param lawsDataSources = [
-  'AuditLogs'
-  'AzureActivity'
-  'SecurityEvent'
-  'SigninLogs'
-  'AzureActiveDirectory'
-]
