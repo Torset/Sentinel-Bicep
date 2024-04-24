@@ -105,6 +105,20 @@ resource office365DataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-
   }
 }
 
+resource officeAtpDataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-02-01-preview' = {
+  name: '${workspaceName}-OfficeATP'
+  kind: 'OfficeATP'
+  scope: laws
+  properties: {
+    dataTypes: {
+      alerts: {
+        state: 'Enabled'
+      }
+    }
+    tenantId: tenantId
+  }
+}
+
 resource sentinelSettingsEntityAnalytics 'Microsoft.SecurityInsights/settings@2024-01-01-preview' = if (enableEntityAnalytics) {
   name: 'EntityAnalytics'
   kind: 'EntityAnalytics'
