@@ -10,4 +10,5 @@ param tenantId = 'abf67dae-9a43-4bf0-aa92-151fd6a1d425'
 
 param enableEntityAnalytics = true
 param enableUeba = true
-
+param enableAnomalies = true
+param enableEyesOn = true

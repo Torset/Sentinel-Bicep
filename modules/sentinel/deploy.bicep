@@ -24,7 +24,11 @@ param enableEntityAnalytics bool
 @description('Optional. Enable UEBA')
 param enableUeba bool
 
+@description('Optional. Enable EyesOn')
+param enableEyesOn bool
 
+@description('Optional. Enable Anomalies')
+param enableAnomalies bool
 
 
 module workspace 'br/public:avm/res/operational-insights/workspace:0.3.4' = {
@@ -120,8 +124,21 @@ resource sentinelSettingsUeba 'Microsoft.SecurityInsights/settings@2024-01-01-pr
   }
 }
 
-
   
+resource sentinelSettingsEyesOn 'Microsoft.SecurityInsights/settings@2024-01-01-preview' = if (enableEyesOn) {
+  name: 'EyesOn'
+  kind: 'EyesOn'
+  scope: laws
+  properties: {}
+}
+
+resource sentinelSettingsAnomalies 'Microsoft.SecurityInsights/settings@2024-01-01-preview' = if (enableAnomalies) {
+  name: 'Anomalies'
+  kind: 'Anomalies'
+  scope: laws
+  properties: {}
+}
+
 
   /////////////////
  // Alert rules //
