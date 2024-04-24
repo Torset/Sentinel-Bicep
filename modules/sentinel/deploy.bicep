@@ -99,22 +99,20 @@ resource office365DataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-
   }
 }
 
-resource sentinelSettingsEntityAnalytics 'Microsoft.SecurityInsights/settings@2023-04-01-preview' = if (enableEntityAnalytics) {
+resource sentinelSettingsEntityAnalytics 'Microsoft.SecurityInsights/settings@2024-01-01-preview' = if (enableEntityAnalytics) {
   name: 'EntityAnalytics'
   kind: 'EntityAnalytics'
   scope: laws
-  etag: '*'
   properties: {
     entityProviders: entityAnalyticsEntityProviders
   } 
 }
 
 
-resource sentinelSettingsUeba 'Microsoft.SecurityInsights/settings@2023-02-01-preview' = if (enableUeba) {
+resource sentinelSettingsUeba 'Microsoft.SecurityInsights/settings@2024-01-01-preview' = if (enableUeba) {
   name: 'Ueba'
   kind: 'Ueba'
   scope: laws
-  etag: '*'
   dependsOn:[sentinelSettingsEntityAnalytics]
   // For remaining properties, see settings objects
   properties: {
