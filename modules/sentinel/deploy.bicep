@@ -103,6 +103,7 @@ resource sentinelSettingsEntityAnalytics 'Microsoft.SecurityInsights/settings@20
   name: 'EntityAnalytics'
   kind: 'EntityAnalytics'
   scope: laws
+  etag: '*'
   properties: {
     entityProviders: entityAnalyticsEntityProviders
   } 
@@ -113,6 +114,7 @@ resource sentinelSettingsUeba 'Microsoft.SecurityInsights/settings@2023-02-01-pr
   name: 'Ueba'
   kind: 'Ueba'
   scope: laws
+  etag: '*'
   dependsOn:[sentinelSettingsEntityAnalytics]
   // For remaining properties, see settings objects
   properties: {
@@ -222,7 +224,6 @@ resource MfaRejectedByUser 'Microsoft.SecurityInsights/alertRules@2023-02-01-pre
     '''
     queryFrequency: 'PT1H'
     queryPeriod: 'P14D'
-    sentinelEntitiesMappings: []
     suppressionEnabled: false
     suppressionDuration: 'PT1H'
     tactics: [
