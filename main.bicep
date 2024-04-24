@@ -13,6 +13,12 @@ param enableEntityAnalytics bool
 @description('Enable UEBA')
 param enableUeba bool
 
+@description('Enable EyesOn')
+param enableEyesOn bool
+
+@description('Enable Anomalies')
+param enableAnomalies bool
+
 
 targetScope = 'subscription'
 
@@ -32,6 +38,8 @@ module sentinel './modules/sentinel/deploy.bicep' = {
     tenantId: tenantId
     enableEntityAnalytics:enableEntityAnalytics
     enableUeba:enableUeba
+    enableEyesOn:enableEyesOn
+    enableAnomalies:enableAnomalies
   }
 }
 
