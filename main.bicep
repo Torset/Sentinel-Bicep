@@ -20,6 +20,7 @@ param enableEyesOn bool
 param enableAnomalies bool
 
 
+
 targetScope = 'subscription'
 
 

@@ -11,3 +11,4 @@ param enableEntityAnalytics = true
 param enableUeba = true
 param enableAnomalies = true
 param enableEyesOn = true
+

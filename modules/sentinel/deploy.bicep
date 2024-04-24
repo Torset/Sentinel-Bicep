@@ -31,6 +31,8 @@ param enableEyesOn bool
 param enableAnomalies bool
 
 
+
+
 module workspace 'br/public:avm/res/operational-insights/workspace:0.3.4' = {
   name: 'workspaceDeployment'
   params: {
