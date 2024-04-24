@@ -119,7 +119,7 @@ resource officeAtpDataConnector 'Microsoft.SecurityInsights/dataConnectors@2023-
   }
 }
 
-resource sentinelSettingsEntityAnalytics 'Microsoft.SecurityInsights/settings@2024-01-01-preview' = if (enableEntityAnalytics) {
+resource sentinelSettingsEntityAnalytics 'Microsoft.SecurityInsights/settings@2023-02-01-preview' = if (enableEntityAnalytics) {
   name: 'EntityAnalytics'
   kind: 'EntityAnalytics'
   scope: laws
@@ -129,7 +129,7 @@ resource sentinelSettingsEntityAnalytics 'Microsoft.SecurityInsights/settings@20
 }
 
 
-resource sentinelSettingsUeba 'Microsoft.SecurityInsights/settings@2024-01-01-preview' = if (enableUeba) {
+resource sentinelSettingsUeba 'Microsoft.SecurityInsights/settings@2023-02-01-preview' = if (enableUeba) {
   name: 'Ueba'
   kind: 'Ueba'
   scope: laws
@@ -141,14 +141,14 @@ resource sentinelSettingsUeba 'Microsoft.SecurityInsights/settings@2024-01-01-pr
 }
 
   
-resource sentinelSettingsEyesOn 'Microsoft.SecurityInsights/settings@2024-01-01-preview' = if (enableEyesOn) {
+resource sentinelSettingsEyesOn 'Microsoft.SecurityInsights/settings@2023-02-01-preview' = if (enableEyesOn) {
   name: 'EyesOn'
   kind: 'EyesOn'
   scope: laws
   properties: {}
 }
 
-resource sentinelSettingsAnomalies 'Microsoft.SecurityInsights/settings@2024-01-01-preview' = if (enableAnomalies) {
+resource sentinelSettingsAnomalies 'Microsoft.SecurityInsights/settings@2023-02-01-preview' = if (enableAnomalies) {
   name: 'Anomalies'
   kind: 'Anomalies'
   scope: laws
