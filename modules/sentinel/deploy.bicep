@@ -164,7 +164,6 @@ resource MfaRejectedByUser 'Microsoft.SecurityInsights/alertRules@2023-02-01-pre
   name: 'MFA Rejected by User'
   kind: 'Scheduled'
   scope: laws
-  // For remaining properties, see alertRules objects
   properties: {
     severity: 'Medium'
     alertRuleTemplateName: 'd99cf5c3-d660-436c-895b-8a8f8448da23'
