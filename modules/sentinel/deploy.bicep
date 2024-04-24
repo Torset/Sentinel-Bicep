@@ -123,6 +123,7 @@ resource sentinelSettingsEntityAnalytics 'Microsoft.SecurityInsights/settings@20
   name: 'EntityAnalytics'
   kind: 'EntityAnalytics'
   scope: laws
+  etag: '*'
   properties: {
     entityProviders: entityAnalyticsEntityProviders
   } 
@@ -133,6 +134,7 @@ resource sentinelSettingsUeba 'Microsoft.SecurityInsights/settings@2024-01-01-pr
   name: 'Ueba'
   kind: 'Ueba'
   scope: laws
+  etag: '*'
   dependsOn:[sentinelSettingsEntityAnalytics]
   // For remaining properties, see settings objects
   properties: {
