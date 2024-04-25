@@ -13,8 +13,8 @@ param sentinelAutomationRgName = 'New-Sentinel-Automation-RG'
 
  // Sentinel settings//
 
-param enableEntityAnalytics = true // Needs to be enabled manually in the portal until bug is fixed
-param enableUeba = true // Needs to be enabled manually in the portal until bug is fixed
+param enableEntityAnalytics = false // Needs to be enabled manually in the portal until bug is fixed
+param enableUeba = false // Needs to be enabled manually in the portal until bug is fixed
 param enableAnomalies = true
 param enableEyesOn = true
 
