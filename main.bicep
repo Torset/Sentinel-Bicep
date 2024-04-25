@@ -19,19 +19,30 @@ param enableEyesOn bool
 @description('Enable Anomalies')
 param enableAnomalies bool
 
+@description('Name of the resource Group where Sentinel will be deployed')
+param sentinelRgName string
+
+@description('Name of the resource Group where Automation rules / playbooks for Sentinel will be deployed')
+param sentinelAutomationRgName string
 
 
 targetScope = 'subscription'
 
 
-resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+resource sentinelRg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   location: location
-  name: 'New-Sentinel-RG'
+  name: sentinelRgName
+  properties: {}
+}
+
+resource sentinelAutomationRg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  location: location
+  name: sentinelAutomationRgName
   properties: {}
 }
 
 module sentinel './modules/sentinel/deploy.bicep' = {
-  scope: resourceGroup
+  scope: sentinelRg
   name: 'SentinelDeployment'
   params: {
     location: location
